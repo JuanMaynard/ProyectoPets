@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class catalog="pets" name="com.cfs3.proyectopets.MascotaDto" optimistic-lock="version" table="tabla_mascota">
+        <id name="idMascota" type="int">
+            <column name="idMascota"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="nombre" type="string">
+            <column length="15" name="nombre" not-null="true"/>
+        </property>
+        <property name="tipo" type="string">
+            <column length="10" name="tipo" not-null="true"/>
+        </property>
+        <property name="color" type="string">
+            <column length="20" name="color" not-null="true"/>
+        </property>
+        <property name="sexo" type="string">
+            <column length="6" name="sexo" not-null="true"/>
+        </property>
+        <bag fetch="select" inverse="true" lazy="true" name="listaFichasm" table="tabla_ficha">
+            <key>
+                <column name="IdMascota" not-null="true"/>
+            </key>
+            <one-to-many class="com.cfs3.proyectopets.FichaDto"/>
+        </bag>
+    </class>
+</hibernate-mapping>

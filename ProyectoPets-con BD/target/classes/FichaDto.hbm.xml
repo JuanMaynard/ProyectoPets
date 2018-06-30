@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class catalog="pets" name="com.cfs3.proyectopets.FichaDto" optimistic-lock="version" table="tabla_ficha">
+    <id name="idFicha" type="int">
+      <column name="idFicha"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.cfs3.proyectopets.MascotaDto" fetch="select" name="mascota">
+      <column name="idMascota" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.cfs3.proyectopets.UsuarioDto" fetch="select" name="usuario">
+      <column name="idUsuario" not-null="true"/>
+    </many-to-one>
+    <property name="estado" type="string">
+      <column length="10" name="estado" not-null="true"/>
+    </property>
+    <property name="descripcion" type="string">
+      <column length="100" name="descripcion" not-null="true"/>
+    </property>
+    <property name="fecha" type="date">
+      <column length="10" name="fecha" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

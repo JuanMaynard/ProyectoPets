@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class catalog="pets" name="com.cfs3.proyectopets.UsuarioDto" optimistic-lock="version" table="tabla_usuario">
+    <id name="idUsuario" type="int">
+      <column name="idUsuario"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="apellidoynombre" type="string">
+      <column length="50" name="apellidoynombre" not-null="true"/>
+    </property>
+    <property name="correo" type="string">
+      <column length="30" name="correo" not-null="true" unique="true"/>
+    </property>
+    <property name="contrasenia" type="string">
+      <column length="10" name="contrasenia" not-null="true"/>
+    </property>
+    <property name="direccion" type="string">
+      <column length="30" name="direccion"/>
+    </property>
+    <property name="telefono" type="java.lang.Integer">
+      <column name="telefono"/>
+    </property>
+    <bag fetch="select" inverse="true" lazy="true" name="listaFichas" table="tabla_ficha">
+      <key>
+        <column name="idUsuario" not-null="true"/>
+      </key>
+      <one-to-many class="com.cfs3.proyectopets.FichaDto"/>
+    </bag>
+  </class>
+</hibernate-mapping>
