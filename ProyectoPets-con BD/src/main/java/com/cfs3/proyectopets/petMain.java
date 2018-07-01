@@ -1,4 +1,4 @@
-/*/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -13,9 +13,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-
-
- 
+/**
+ *
+ * @author AleC
+ */
 public class petMain {
 
     
@@ -29,11 +30,11 @@ public class petMain {
 
         //creacion mascotas
         MascotaCtr mascoCtr = new MascotaCtr();
-        mascoCtr.registrarMascota(1, "pepo", "gato", "negro y blanco", "macho");
-        mascoCtr.registrarMascota(2, "laica", "perro", "marron", "hembra");
-        mascoCtr.registrarMascota(3, "nn", "gato", "gris", "hembra");
-        mascoCtr.registrarMascota(4, "nn", "perro", "negro", "macho");
-        mascoCtr.registrarMascota(5, "nn", "perro", "gris", "hembra");
+        mascoCtr.registrarMascota("pepo", "gato", "negro y blanco", "macho");
+        mascoCtr.registrarMascota("laica", "perro", "marron", "hembra");
+        mascoCtr.registrarMascota("nn", "gato", "gris", "hembra");
+        mascoCtr.registrarMascota("nn", "perro", "negro", "macho");
+        mascoCtr.registrarMascota("nn", "perro", "gris", "hembra");
 
         //creacion fichas
         FichaCtr fiCtr = new FichaCtr();
@@ -76,6 +77,8 @@ public class petMain {
 
         //buscar mascotas, por ejemplo, encontradas en el parque
         fiCtr.buscarMascotaEn("encontrado", "parque");
+        
+        mascoCtr.registrarMascota();
                 
     try {
 
@@ -83,15 +86,15 @@ public class petMain {
                      .configure()
                      .build();
             try {
-                 System.out.println("hola111111111111");
+                 
                  SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
                  Session session = sessionFactory.openSession();
                  session.beginTransaction();
-                 ejemplo3(session);
-       //         ejemplo3(session);
-       //         session.getTransaction().commit();
-       //         session.close();
-       //         sessionFactory.close();
+                 ejemplo1(session);
+                 //ejemplo3(session);
+                 session.getTransaction().commit();
+                 session.close();
+                 sessionFactory.close();
                 } catch (Exception e) {
                   e.printStackTrace();
                  }
@@ -142,11 +145,9 @@ public class petMain {
         Query q = session.createQuery("from MascotaDto where color = :color");
         q.setParameter("color", "gris");
         List<MascotaDto> l = q.list();
-        
         System.out.println("Lista de mascotas");
         for (MascotaDto mas : l) {
             System.out.println(mas.getNombre()+" "+mas.getColor()+" "+mas.getSexo()+" "+mas.getTipo());
-            
         }
     }
 

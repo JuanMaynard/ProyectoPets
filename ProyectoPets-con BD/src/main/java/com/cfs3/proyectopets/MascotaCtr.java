@@ -8,6 +8,7 @@ package com.cfs3.proyectopets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import vistas.CargaMascota;
 
 /**
  *
@@ -16,21 +17,31 @@ import java.util.List;
 public class MascotaCtr {
 
     List<MascotaDto> listMasco;
+    int idMasco;
     //constructora
 
     public MascotaCtr() {
         this.listMasco = new ArrayList<>();
+        this.idMasco=0;
     }
     //metodos
 
-    void registrarMascota(int idMascota, String nombre, String tipo, String color, String sexo) {
-        //agrega una mascota
-        //int indice=listMasco.size();//valor de IdMascota
-        MascotaDto mascota = new MascotaDto(idMascota,nombre,tipo,color,sexo);
-        listMasco.add(mascota);
+    void registrarMascota(String nombre, String tipo, String color, String sexo) {
+       //agrega una mascota a la lista
+       this.idMasco++;
+       MascotaDto mascota = new MascotaDto(idMasco,nombre,tipo,color,sexo);
+       listMasco.add(mascota);
     }
     void registrarMascota(MascotaDto m){
+        //registro de mascota usando listas
+        this.idMasco++;
         listMasco.add(m);
+    }
+    void registrarMascota(){
+        //registro de mascota por base de datos
+        this.idMasco++;
+        String idMascoText=String.valueOf(idMasco);
+        CargaMascota.main(idMascoText);    
     }
     void agregarFicha(MascotaDto m,FichaDto f){
      List<FichaDto> l=m.getListaFichasm();
